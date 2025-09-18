@@ -1,4 +1,5 @@
-INSERT INTO roles (id, role_name) VALUES (1, 'Admin');
-INSERT INTO roles (id, role_name) VALUES (2, 'User');
-INSERT INTO roles (id, role_name) VALUES (3, 'HOD');
+INSERT INTO field (id, field) VALUES (1, 'frontend web developer');
+INSERT INTO field (id, field) VALUES (2, 'Backend developer');
+INSERT INTO field (id, field) VALUES (3, 'mobile app developer');
+INSERT INTO field (id, field) VALUES (4, 'Data scientist');
 

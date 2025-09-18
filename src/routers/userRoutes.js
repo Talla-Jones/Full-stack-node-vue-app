@@ -9,7 +9,7 @@ router.delete('/delete/:id', deleteUser)
 router.post('/login', getUser)
 
 router.get('/profile', auth, (req, res) => {
-  res.json({ message: `Welcome ${req.user.email}` });
+  res.json({ message: `Welcome ${req.user.username}` });
 });
 
 
