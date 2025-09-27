@@ -1,25 +1,26 @@
 const db = require('../config/db')
-const hashPassword = require('../utils/hashedPassword')
+const bcrypt = require('../utils/bcrypt')
 
 
-async function createUser(username, email, password, role_id) {
-  const hashedPassword = await hashPassword(password);
+async function createUser(username, email, password, portfolio, resume) {
+  const hashedPassword = await bcrypt.hashPassword(password)
+  
   const [result] = await db.execute(
-    'INSERT INTO users (username, email, password, role_id) values (?, ?, ?, ?)',
-    [username, email, hashedPassword, role_id]
+    'INSERT INTO users (full_name, email, password_hash, portfolio_link, resume_path) values (?, ?, ?, ?, ?)',
+    [username, email, hashedPassword, portfolio, resume]
   );
-  return result.insertId;
+  return result;
 }
 
 async function updateUser(id, {username, email, password}){
-  const hashedPassword = await hashPassword.hashPassword(password);
-  const query = `UPDATE users SET username = ?, email = ? , password = ? WHERE id = ?`;
+  const hashedPassword = await bcrypt.hashPassword(password);
+  const query = `UPDATE users SET full_name = ?, email = ? , password_hash = ? WHERE user_id = ?`;
   const [result] = await db.execute(query, [username, email, hashedPassword, id])
   return result;
 }
 
 async function deleteUser(id) {
-  const query = `DELETE FROM users WHERE id = ?`;
+  const query = `DELETE FROM users WHERE user_id = ?`;
   const [result] = await db.execute(query, [id]);
   return result;
 }

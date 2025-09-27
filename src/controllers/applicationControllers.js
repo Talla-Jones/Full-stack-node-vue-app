@@ -2,12 +2,13 @@ const Application = require('../Models/applicationModel')
 require('dotenv').config()
 
 async function addApplication(req, res) {
-  const {user_id, category_id, years_of_experience, field_id} = req.body;
+  const {application, post, applicant, cover_letter, notes} = req.body;
 
   try{
-    const result = await Application.createApplication(user_id, category_id, years_of_experience, field_id);
+    const result = await Application.createApplication(post, applicant, cover_letter, notes);
 
-    res.status(201).json({message: 'Application submitted Successfully'})
+    res.status(201).json({message: 'Application submiitted Successfully'})
+    return result;
   }catch(err){
     console.error('Error creating application: ', err);
     res.status(500).json({error: 'Internal Server Error'})
@@ -20,8 +21,10 @@ async function removeApplication(req, res) {
   try {
     const result = await Application.deleteApplication(id);
 
+    console.log(result)
+
     if(result.affectedRows === 0){
-      return res.status(404).json({message: 'Application not found'})
+      return res.status(404).json({message: 'No application found'})
     }
 
     res.status(201).json({message: 'Application deleted successfully'})

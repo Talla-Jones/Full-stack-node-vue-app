@@ -1,13 +1,20 @@
-const express = require('express')
-const app = express()
+// src/app.js
+const express = require('express');
+const cors = require('cors');
+const messageRoutes = require("./routers/messageRoutes");
+const userRoutes = require('./routers/userRoutes');
+const postRoutes = require('./routers/postsRoutes');
+const applicationRoutes = require('./routers/applicationRoutes');
 
-app.use(express.json())
+const app = express();
 
-const userRoutes = require('./routers/userRoutes')
-const applicationRoutes = require('./routers/applicationRoutes')
+app.use(express.json());
+app.use(cors());
 
 app.use('/users', userRoutes);
-app.use('/application', applicationRoutes);
+app.use('/postings', postRoutes);
+app.use('/applications', applicationRoutes);
+app.use("/messages", messageRoutes);
 
 module.exports = app;
 
