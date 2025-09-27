@@ -1,4 +1,5 @@
 const Application = require('../Models/applicationModel')
+require('dotenv').config()
 
 async function addApplication(req, res) {
   const {user_id, category_id, years_of_experience, field_id} = req.body;

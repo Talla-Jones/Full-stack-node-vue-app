@@ -69,9 +69,6 @@ async function getUser(req, res) {
       return res.status(404).json({ message: 'User not found' })
     }
     const isMatch = hashPassword.comparator(password, user.password);
-    console.log("Entered password:", password);
-    console.log("Stored password:", user.password);
-
 
     if (!isMatch){
       return res.status(401).json({message: 'Invalid password'})

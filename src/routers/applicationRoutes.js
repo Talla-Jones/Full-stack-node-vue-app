@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router()
-const Application = require('../controllers/applicationControllers')
+const {addApplication, removeApplication} = require('../controllers/applicationControllers')
 
-router.post('/submit', Application.addApplication);
-router.delete('/delete', Application.removeApplication);
+router.post('/submit', addApplication);
+router.delete('/delete/:id', removeApplication);
+
+module.exports = router

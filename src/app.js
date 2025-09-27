@@ -10,3 +10,4 @@ app.use('/users', userRoutes);
 app.use('/application', applicationRoutes);
 
 module.exports = app;
+
